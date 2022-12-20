@@ -1,0 +1,16 @@
+---
+- name: Configure ntp and syslog
+  hosts: switches_poi
+  gather_facts: no
+
+  tasks:
+    - name: configure ntp and syslog
+      cisco.ios.ios_config:
+        lines:
+        - ntp server 10.159.114.38
+        - logging 10.159.114.67
+
+    - name: show ntp status
+      cisco.ios.ios_command:
+        commands: show ntp status
+        wait_for: result[0] contains Clock is synchronized

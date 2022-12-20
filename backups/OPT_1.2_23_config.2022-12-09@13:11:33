@@ -1,0 +1,247 @@
+Building configuration...
+
+Current configuration : 4878 bytes
+!
+! Last configuration change at 14:39:38 UTC Thu Nov 17 2022 by kolenkoay
+! NVRAM config last updated at 14:40:26 UTC Thu Nov 17 2022 by kolenkoay
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname OPT-1.2-23
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$nIX.$JgA3ETjbMaaMNtWjuaY3y1
+!
+username admin privilege 15 secret 5 $1$ZnWh$C/at/TXpJBmIq1huKdnVD0
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default group radius local
+aaa authorization exec default group radius local 
+!
+!
+!
+aaa session-id common
+switch 2 provision ws-c3750x-48p
+system mtu routing 1500
+!
+!
+no ip domain-lookup
+ip domain-name em.local
+vtp mode off
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 3957
+ name mgmt
+!
+vlan 3967
+ name CORP
+!
+vlan 3968
+ name GUEST
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet2/0/1
+ description to_CKC-1-15_9
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1,3957,3967,3968
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/2
+ description to_ORT-1.2-21_2
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1,3957,3967,3968
+ switchport mode trunk
+!
+interface GigabitEthernet2/0/3
+!
+interface GigabitEthernet2/0/4
+!
+interface GigabitEthernet2/0/5
+!
+interface GigabitEthernet2/0/6
+!
+interface GigabitEthernet2/0/7
+!
+interface GigabitEthernet2/0/8
+!
+interface GigabitEthernet2/0/9
+!
+interface GigabitEthernet2/0/10
+!
+interface GigabitEthernet2/0/11
+!
+interface GigabitEthernet2/0/12
+!
+interface GigabitEthernet2/0/13
+!
+interface GigabitEthernet2/0/14
+!
+interface GigabitEthernet2/0/15
+!
+interface GigabitEthernet2/0/16
+!
+interface GigabitEthernet2/0/17
+!
+interface GigabitEthernet2/0/18
+!
+interface GigabitEthernet2/0/19
+!
+interface GigabitEthernet2/0/20
+!
+interface GigabitEthernet2/0/21
+!
+interface GigabitEthernet2/0/22
+!
+interface GigabitEthernet2/0/23
+!
+interface GigabitEthernet2/0/24
+!
+interface GigabitEthernet2/0/25
+!
+interface GigabitEthernet2/0/26
+!
+interface GigabitEthernet2/0/27
+!
+interface GigabitEthernet2/0/28
+!
+interface GigabitEthernet2/0/29
+!
+interface GigabitEthernet2/0/30
+!
+interface GigabitEthernet2/0/31
+!
+interface GigabitEthernet2/0/32
+!
+interface GigabitEthernet2/0/33
+!
+interface GigabitEthernet2/0/34
+!
+interface GigabitEthernet2/0/35
+!
+interface GigabitEthernet2/0/36
+!
+interface GigabitEthernet2/0/37
+!
+interface GigabitEthernet2/0/38
+!
+interface GigabitEthernet2/0/39
+!
+interface GigabitEthernet2/0/40
+!
+interface GigabitEthernet2/0/41
+!
+interface GigabitEthernet2/0/42
+!
+interface GigabitEthernet2/0/43
+!
+interface GigabitEthernet2/0/44
+ description test_AP11_10.159.120.234
+ switchport access vlan 3967
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet2/0/45
+ description test_AP08_10.159.120.237
+ switchport access vlan 3967
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet2/0/46
+ description test_AP04_10.159.120.246
+ switchport access vlan 3967
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet2/0/47
+ description test_AP07_10.159.120.243
+ switchport access vlan 3967
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet2/0/48
+ description test_AP03_10.159.120.247
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet2/1/1
+!
+interface GigabitEthernet2/1/2
+!
+interface GigabitEthernet2/1/3
+!
+interface GigabitEthernet2/1/4
+!
+interface TenGigabitEthernet2/1/1
+!
+interface TenGigabitEthernet2/1/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan3957
+ ip address 172.20.36.171 255.255.252.0
+!
+interface Vlan3967
+ ip address 10.159.120.171 255.255.255.0
+!
+ip default-gateway 172.20.36.1
+ip http server
+ip http secure-server
+radius-server host 172.17.74.37 auth-port 1645 acct-port 1646 key 7 1543595F507F7D7370
+!
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ exec-timeout 60 0
+ transport input ssh
+line vty 5 15
+ transport input ssh
+!
+ntp clock-period 36026611
+ntp server 10.159.114.38
+end

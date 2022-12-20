@@ -1,0 +1,262 @@
+Building configuration...
+
+Current configuration : 4353 bytes
+!
+! Last configuration change at 13:24:02 UTC Mon Nov 7 2022 by kolenkoay
+! NVRAM config last updated at 13:24:04 UTC Mon Nov 7 2022 by kolenkoay
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname CKC-2-14
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$4dhW$S4oavTHosoOA2eAWH5Yww1
+!
+username admin privilege 15 secret 5 $1$DQf7$UN.BJmiaV.KQ2..g/0bFu/
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default group radius local
+aaa authorization exec default group radius local 
+!
+!
+!
+aaa session-id common
+switch 3 provision ws-c3750x-48p
+system mtu routing 1500
+!
+!
+no ip domain-lookup
+ip domain-name em.local
+vtp mode off
+!
+!
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 3957
+ name mgmt
+!
+vlan 3967
+ name CORP
+!
+vlan 3968
+ name GUEST
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet3/0/1
+ shutdown
+!
+interface GigabitEthernet3/0/2
+ description test_AP01_10.159.120.249
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet3/0/3
+ switchport mode access
+ shutdown
+!
+interface GigabitEthernet3/0/4
+ shutdown
+!
+interface GigabitEthernet3/0/5
+ description test_AP10_10.159.120.235
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet3/0/6
+!
+interface GigabitEthernet3/0/7
+ shutdown
+!
+interface GigabitEthernet3/0/8
+ shutdown
+!
+interface GigabitEthernet3/0/9
+ shutdown
+!
+interface GigabitEthernet3/0/10
+ shutdown
+!
+interface GigabitEthernet3/0/11
+ shutdown
+!
+interface GigabitEthernet3/0/12
+ shutdown
+!
+interface GigabitEthernet3/0/13
+ shutdown
+!
+interface GigabitEthernet3/0/14
+ shutdown
+!
+interface GigabitEthernet3/0/15
+ shutdown
+!
+interface GigabitEthernet3/0/16
+ shutdown
+!
+interface GigabitEthernet3/0/17
+ shutdown
+!
+interface GigabitEthernet3/0/18
+ shutdown
+!
+interface GigabitEthernet3/0/19
+ shutdown
+!
+interface GigabitEthernet3/0/20
+ shutdown
+!
+interface GigabitEthernet3/0/21
+ shutdown
+!
+interface GigabitEthernet3/0/22
+ shutdown
+!
+interface GigabitEthernet3/0/23
+ shutdown
+!
+interface GigabitEthernet3/0/24
+ shutdown
+!
+interface GigabitEthernet3/0/25
+ shutdown
+!
+interface GigabitEthernet3/0/26
+ shutdown
+!
+interface GigabitEthernet3/0/27
+ shutdown
+!
+interface GigabitEthernet3/0/28
+ shutdown
+!
+interface GigabitEthernet3/0/29
+ shutdown
+!
+interface GigabitEthernet3/0/30
+ shutdown
+!
+interface GigabitEthernet3/0/31
+ shutdown
+!
+interface GigabitEthernet3/0/32
+ shutdown
+!
+interface GigabitEthernet3/0/33
+ shutdown
+!
+interface GigabitEthernet3/0/34
+ shutdown
+!
+interface GigabitEthernet3/0/35
+ shutdown
+!
+interface GigabitEthernet3/0/36
+ shutdown
+!
+interface GigabitEthernet3/0/37
+ shutdown
+!
+interface GigabitEthernet3/0/38
+ shutdown
+!
+interface GigabitEthernet3/0/39
+ shutdown
+!
+interface GigabitEthernet3/0/40
+ shutdown
+!
+interface GigabitEthernet3/0/41
+ shutdown
+!
+interface GigabitEthernet3/0/42
+ shutdown
+!
+interface GigabitEthernet3/0/43
+ shutdown
+!
+interface GigabitEthernet3/0/44
+ shutdown
+!
+interface GigabitEthernet3/0/45
+ shutdown
+!
+interface GigabitEthernet3/0/46
+ shutdown
+!
+interface GigabitEthernet3/0/47
+ description to_CKC-1-15_49
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 3957,3967,3968
+ switchport mode trunk
+!
+interface GigabitEthernet3/0/48
+ shutdown
+!
+interface GigabitEthernet3/1/1
+!
+interface GigabitEthernet3/1/2
+!
+interface GigabitEthernet3/1/3
+!
+interface GigabitEthernet3/1/4
+!
+interface TenGigabitEthernet3/1/1
+!
+interface TenGigabitEthernet3/1/2
+!
+interface Vlan1
+ ip address dhcp
+ shutdown
+!
+interface Vlan3957
+ ip address 172.20.36.169 255.255.252.0
+!
+interface Vlan3967
+ ip address 10.159.120.169 255.255.255.0
+!
+ip default-gateway 172.20.36.1
+ip http server
+ip http secure-server
+radius-server host 172.17.74.37 auth-port 1645 acct-port 1646 key 7 1543595F507F7D7370
+!
+!
+line con 0
+line vty 0 4
+ exec-timeout 60 0
+ transport input ssh
+line vty 5 15
+ transport input ssh
+!
+ntp clock-period 36026757
+ntp server 10.159.114.38
+end

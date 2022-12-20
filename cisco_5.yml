@@ -1,0 +1,36 @@
+---
+- name: "Add new vlan to aristas"
+  hosts: "switches_arista"
+  gather_facts: false
+  vars:
+    vlan: 1004
+
+  tasks:
+    - name: "add new vlan"
+      eos_config:
+        lines:
+          - "name vlan_{{ vlan }}"
+        parents: vlan {{ vlan }}
+        replace: block
+    
+    - name: "check if the vlan already"
+      eos_command:
+        commands:
+          - "show vlan brief | json"
+        wait_for:
+          - "result[0].vlans contains {{ vlan }} "
+    - name: "add vlan to Po25"
+      eos_config:
+        lines:
+          - "switchport trunk allowed vlan add {{ vlan }}"
+        parents: interface port-Channel 25
+    - name: "add vlan to Po21 (CP1)"
+      eos_config:
+        lines:
+          - "switchport trunk allowed vlan add {{ vlan }}"
+        parents: interface port-Channel 21
+    - name: "add vlan to Po22 (CP2)"
+      eos_config:
+        lines:
+          - "switchport trunk allowed vlan add {{ vlan }}"
+        parents: interface port-Channel 22

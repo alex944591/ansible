@@ -1,0 +1,302 @@
+Building configuration...
+
+Current configuration : 6313 bytes
+!
+version 12.2
+no service pad
+service timestamps debug datetime msec
+service timestamps log datetime msec
+service password-encryption
+!
+hostname OPT-1.2-21
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$nIX.$JgA3ETjbMaaMNtWjuaY3y1
+!
+username admin privilege 15 secret 5 $1$ZnWh$C/at/TXpJBmIq1huKdnVD0
+!
+!
+aaa new-model
+!
+!
+aaa authentication login default group radius local
+aaa authorization exec default group radius local 
+!
+!
+!
+aaa session-id common
+switch 1 provision ws-c3750x-48p
+system mtu routing 1500
+!
+!
+no ip domain-lookup
+ip domain-name em.local
+vtp mode off
+!
+!
+crypto pki trustpoint TP-self-signed-1999443200
+ enrollment selfsigned
+ subject-name cn=IOS-Self-Signed-Certificate-1999443200
+ revocation-check none
+ rsakeypair TP-self-signed-1999443200
+!
+!
+crypto pki certificate chain TP-self-signed-1999443200
+ certificate self-signed 01
+  3082024B 308201B4 A0030201 02020101 300D0609 2A864886 F70D0101 04050030 
+  31312F30 2D060355 04031326 494F532D 53656C66 2D536967 6E65642D 43657274 
+  69666963 6174652D 31393939 34343332 3030301E 170D3933 30333031 30303135 
+  35335A17 0D323030 31303130 30303030 305A3031 312F302D 06035504 03132649 
+  4F532D53 656C662D 5369676E 65642D43 65727469 66696361 74652D31 39393934 
+  34333230 3030819F 300D0609 2A864886 F70D0101 01050003 818D0030 81890281 
+  810098A0 E3006AC5 1FA68D44 3FA85C52 08586C96 DC8385AC 826D8583 CE0DA0E4 
+  38EAB536 46CA40E8 DA2605BF F5FA06B5 F42CC8BE 66CF7D31 B478F654 F7E29E94 
+  5AD853E9 B216B695 BECA2DD3 6ED01A68 45A3038F 7C3AAB74 5D36A2D5 C16D77F1 
+  F3C9BE7C F87A0EE2 9F92AB6A 83A3B11E 22E2A8AE C7ADB284 9F77FD0F D13F175F 
+  3CA30203 010001A3 73307130 0F060355 1D130101 FF040530 030101FF 301E0603 
+  551D1104 17301582 134F5054 2D312E32 2D32312E 656D2E6C 6F63616C 301F0603 
+  551D2304 18301680 14F3B212 D9A77E96 1D037F0C 6EF676BC 1156E463 90301D06 
+  03551D0E 04160414 F3B212D9 A77E961D 037F0C6E F676BC11 56E46390 300D0609 
+  2A864886 F70D0101 04050003 81810005 7FF3CBA1 31AAC43B 6810B6CA 74462F73 
+  9DED05FA 33E52043 446392CF E4A23D0B 778D08F6 99FA1DED 7387EA0E E68C530E 
+  A5405084 6BE43FAE 06C206AA BE45A0C5 E988C6B4 1CA4971D AF5DF89C 7B9C233A 
+  D91DDAF2 BF1F4F50 BB978C5B C57F7D8C 1B2DA1A9 FD891A7A BC8E1647 4525DB06 
+  46774DC6 CABDD819 016FB143 F69B2B
+  quit
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+!
+!
+!
+vlan internal allocation policy ascending
+!
+vlan 12
+ name HQ-VoIP
+!
+vlan 13
+ name HQ-Office
+!
+vlan 14
+ name HQ-WiFi-corp
+!
+vlan 15
+ name HQ-WiFi-guest
+!
+vlan 100
+ name management
+!
+vlan 200
+ name VoIP
+!
+vlan 202
+ name HQ-VideoConferencing
+!
+vlan 210
+ name GUP-VoIP
+!
+vlan 300
+ name Office
+!
+vlan 310
+ name GUP-Office
+!
+vlan 500
+ name Guest
+!
+vlan 600
+ name printer
+!
+vlan 601
+ name HQ-Printer
+!
+vlan 602
+ name HQ-printer-NEW
+!
+vlan 700
+ name SECURITY
+!
+vlan 3957
+ name mgmt
+!
+vlan 3967
+ name CORP
+!
+vlan 3968
+ name GUEST
+!
+!
+!
+interface FastEthernet0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet1/0/1
+!
+interface GigabitEthernet1/0/2
+ description to_ORT-1.2-21_2
+ switchport trunk encapsulation dot1q
+ switchport trunk allowed vlan 1,3957,3967,3968
+ switchport mode trunk
+!
+interface GigabitEthernet1/0/3
+!
+interface GigabitEthernet1/0/4
+!
+interface GigabitEthernet1/0/5
+!
+interface GigabitEthernet1/0/6
+!
+interface GigabitEthernet1/0/7
+!
+interface GigabitEthernet1/0/8
+!
+interface GigabitEthernet1/0/9
+!
+interface GigabitEthernet1/0/10
+!
+interface GigabitEthernet1/0/11
+!
+interface GigabitEthernet1/0/12
+!
+interface GigabitEthernet1/0/13
+!
+interface GigabitEthernet1/0/14
+!
+interface GigabitEthernet1/0/15
+!
+interface GigabitEthernet1/0/16
+!
+interface GigabitEthernet1/0/17
+!
+interface GigabitEthernet1/0/18
+!
+interface GigabitEthernet1/0/19
+!
+interface GigabitEthernet1/0/20
+!
+interface GigabitEthernet1/0/21
+!
+interface GigabitEthernet1/0/22
+!
+interface GigabitEthernet1/0/23
+!
+interface GigabitEthernet1/0/24
+!
+interface GigabitEthernet1/0/25
+!
+interface GigabitEthernet1/0/26
+!
+interface GigabitEthernet1/0/27
+!
+interface GigabitEthernet1/0/28
+!
+interface GigabitEthernet1/0/29
+!
+interface GigabitEthernet1/0/30
+!
+interface GigabitEthernet1/0/31
+!
+interface GigabitEthernet1/0/32
+!
+interface GigabitEthernet1/0/33
+!
+interface GigabitEthernet1/0/34
+!
+interface GigabitEthernet1/0/35
+!
+interface GigabitEthernet1/0/36
+!
+interface GigabitEthernet1/0/37
+!
+interface GigabitEthernet1/0/38
+!
+interface GigabitEthernet1/0/39
+!
+interface GigabitEthernet1/0/40
+!
+interface GigabitEthernet1/0/41
+!
+interface GigabitEthernet1/0/42
+!
+interface GigabitEthernet1/0/43
+!
+interface GigabitEthernet1/0/44
+!
+interface GigabitEthernet1/0/45
+ description test_AP0__10.159.120._
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet1/0/46
+ description test_AP09_10.159.120.234
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet1/0/47
+ description test_AP06_10.159.120.244
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet1/0/48
+ description test_AP05_10.159.120.245
+ switchport trunk encapsulation dot1q
+ switchport trunk native vlan 3967
+ switchport trunk allowed vlan 3967,3968
+ switchport mode trunk
+ spanning-tree portfast trunk
+ spanning-tree bpdufilter enable
+!
+interface GigabitEthernet1/1/1
+!
+interface GigabitEthernet1/1/2
+!
+interface GigabitEthernet1/1/3
+!
+interface GigabitEthernet1/1/4
+!
+interface TenGigabitEthernet1/1/1
+!
+interface TenGigabitEthernet1/1/2
+!
+interface Vlan1
+ no ip address
+ shutdown
+!
+interface Vlan3957
+ ip address 172.20.36.172 255.255.252.0
+!
+interface Vlan3967
+ ip address 10.159.120.172 255.255.255.0
+!
+ip default-gateway 172.20.36.1
+ip http server
+ip http secure-server
+radius-server host 172.17.74.37 auth-port 1645 acct-port 1646 key 7 1543595F507F7D7370
+!
+!
+line con 0
+ logging synchronous
+line vty 0 4
+ exec-timeout 60 0
+ transport input ssh
+line vty 5 15
+ transport input ssh
+!
+ntp clock-period 36028048
+ntp server 10.159.114.38
+end

@@ -1,0 +1,15 @@
+---
+- hosts: linux_machines
+  
+  tasks:
+
+    - name: check disk usage
+      shell: df
+      register: output
+
+    - name: which cmd was executed
+      debug:
+        msg: "{{ output['cmd'] }}"
+    - name: Result output 
+      debug:  
+        msg: "{{ output['stdout_lines'] }}"

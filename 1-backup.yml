@@ -1,0 +1,11 @@
+---
+- name: Create backup config
+  hosts: switches_wifi
+  gather_facts: no
+  
+  tasks:
+    - name: configurable backup path
+      cisco.ios.ios_config:
+        backup: yes
+        backup_options: 
+          dir_path: /etc/ansible/backups
